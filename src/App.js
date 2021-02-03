@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { NavBar } from './Components/NavBar'
+import { NavBar } from './Components/NavBar';
+import { Menu } from './Components/Menu'
 
 const GlobalStyle = createGlobalStyle`
   html{
@@ -43,6 +44,7 @@ function App() {
     <>
       <GlobalStyle/>
       <NavBar/>
+      <Menu/>
     </>
   );
 }
