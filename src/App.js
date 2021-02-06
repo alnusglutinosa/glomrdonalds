@@ -2,8 +2,10 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { NavBar } from './Components/NavBar';
 import { Menu } from './Components/Menu';
-import { ModalItem } from './Components/ModalItem'
-import { Order } from './Components/Order'
+import { ModalItem } from './Components/ModalItem';
+import { Order } from './Components/Order';
+import { useOpenItem } from './Components/Hooks/useOpenItem';
+import { useOrders } from './Components/Hooks/useOrders';
 
 const GlobalStyle = createGlobalStyle`
   html{
@@ -44,7 +46,10 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 
-  const [openItem, setOpenItem] = React.useState(null);
+  const openItem = useOpenItem();
+  const orders = useOrders();
+
+  //const [openItem, setOpenItem] = React.useState(null);
 
   console.log('openItem=', openItem);
 
@@ -52,9 +57,9 @@ function App() {
     <>
       <GlobalStyle/>
       <NavBar/>
-      <Order/>
-      <Menu setOpenItem={setOpenItem}/>
-      <ModalItem openItem={openItem} setOpenItem={setOpenItem}/>
+      <Order {...orders}/>
+      <Menu {...openItem}/>
+      { openItem.openItem && <ModalItem {...openItem} {...orders} />}
     </>
   );
 }

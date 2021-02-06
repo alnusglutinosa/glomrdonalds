@@ -31,6 +31,11 @@ const OrderList = styled.div`
     
 `;
 
+const EmptyList = styled.div`
+    text-align: center;
+    color: #777;
+`;
+
 const Total = styled.div`
     text-align: center;
     display: flex;
@@ -48,14 +53,18 @@ const Button = styled.button`
     box-shadow: 1px 1px 6px rgb(51 51 51 / 56%);
 `;
 
-export const Order = () => {
+export const Order = ({orders}) => {
     return (
         <OrderStyled>
             <OrderTitle>Ваш заказ</OrderTitle>
             <OrderContent>
-                <OrderList>
-                    <OrderListItem/>
-                </OrderList>
+                {orders.length ? 
+                    <OrderList>
+                        {orders.map(order => <OrderListItem order={order}/>)}
+                        
+                    </OrderList> : 
+                <EmptyList>СписокЗаказов пуст</EmptyList>
+            }
             </OrderContent>
 
             <Total>

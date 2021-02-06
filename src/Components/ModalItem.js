@@ -47,17 +47,26 @@ const Button = styled.button`
     box-shadow: 1px 1px 6px rgb(51 51 51 / 56%);
 `;
 
-export const ModalItem = ({ openItem, setOpenItem }) => {
+export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
-    function closeModal(e) {
+    const closeModal = (e) => {
         if (e.target.id === 'overlay') {
             setOpenItem(null);
         }
-    }
+    };
 
-    if (!openItem) {
-        return null;
-    }
+    const order = {
+        ...openItem
+    };
+
+    const addToOrder = () => {
+        setOrders([...orders, order]);
+        setOpenItem(null);
+    };
+
+    // if (!openItem) {
+    //     return null;
+    // }
 
     return (
         <Overlay id="overlay" onClick={closeModal}>
@@ -66,7 +75,9 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
                 <Banner img={openItem.img}/>
                 <p>{openItem.name}</p>
                 <p>{openItem.price}</p>
-                <Button>Купить</Button>
+                <Button onClick={addToOrder}>
+                    Купить
+                </Button>
             </Modal>
         </Overlay>
     )

@@ -20,11 +20,11 @@ const TrashButton = styled.button`
     cursor: pointer;
 `;
 
-export const OrderListItem = () => {
+export const OrderListItem = ({order}) => {
     return (
         <OrderItemStyled>
-            <span>name</span>
-            <span>1</span>
+            <span>{order.name}</span>
+            <span>{order.price}</span>
             <span>750 P</span>
             <TrashButton>bue</TrashButton>
         </OrderItemStyled>
