@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { totalPriseItems } from '../Modal/ModalItem';
 
 
 const OrderItemStyled = styled.li`
@@ -24,8 +25,9 @@ export const OrderListItem = ({order}) => {
     return (
         <OrderItemStyled>
             <span>{order.name}</span>
+            <span>{order.count}</span>
             <span>{order.price}</span>
-            <span>750 P</span>
+            <span>{totalPriseItems(order)}</span>
             <TrashButton>bue</TrashButton>
         </OrderItemStyled>
     )

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { OrderListItem } from './OrderListItem';
+import { totalPriseItems } from '../Modal/ModalItem';
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -54,13 +55,18 @@ const Button = styled.button`
 `;
 
 export const Order = ({orders}) => {
+
+    const total = orders.reduce((result, order)=>
+        totalPriseItems(order) + result, 0)
+    
+
     return (
         <OrderStyled>
             <OrderTitle>Ваш заказ</OrderTitle>
             <OrderContent>
                 {orders.length ? 
                     <OrderList>
-                        {orders.map(order => <OrderListItem order={order}/>)}
+                        {orders.map(order => <OrderListItem key={order.name} order={order}/>)}
                         
                     </OrderList> : 
                 <EmptyList>СписокЗаказов пуст</EmptyList>
@@ -69,7 +75,7 @@ export const Order = ({orders}) => {
 
             <Total>
                 <span>Итого</span>
-                <span>5</span>
+                <span>{total}</span>
                 <span>P</span>
             </Total>
             <Button>Заказать</Button>

@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CountItem } from './CountItem'; 
+import { useCount } from '../Hooks/useCount';
 
 const Overlay = styled.div`
     position: fixed;
@@ -47,8 +49,18 @@ const Button = styled.button`
     box-shadow: 1px 1px 6px rgb(51 51 51 / 56%);
 `;
 
+const TotalPriceItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+    
+`;
+
+export const totalPriseItems = order => order.price * order.count;
+
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
+    const counter = useCount();
+    
     const closeModal = (e) => {
         if (e.target.id === 'overlay') {
             setOpenItem(null);
@@ -56,7 +68,8 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
     };
 
     const order = {
-        ...openItem
+        ...openItem,
+        count: counter.count
     };
 
     const addToOrder = () => {
@@ -75,6 +88,14 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                 <Banner img={openItem.img}/>
                 <p>{openItem.name}</p>
                 <p>{openItem.price}</p>
+
+                <CountItem {...counter}/>
+
+                <TotalPriceItem>
+                    <span>Цена</span>
+                    <span>{totalPriseItems(order)}</span>
+                </TotalPriceItem>
+
                 <Button onClick={addToOrder}>
                     Купить
                 </Button>

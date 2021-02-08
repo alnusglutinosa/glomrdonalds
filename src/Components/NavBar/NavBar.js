@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import logoImg from '../images/logo.svg';
+import logoImg from '../../images/logo.svg';
 
 const NavBarStyled = styled.header`
     position: fixed;
